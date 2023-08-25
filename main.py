@@ -5,6 +5,8 @@ from Figuras.piece_two import *
 from Figuras.piece_three import *
 from Figuras.piece_four import *
 from Movements.movements import *
+from pynput import keyboard
+from time import sleep
 
 def createFigure(screen: Screen):
     randomSelection = randrange(0, 3)
@@ -27,31 +29,31 @@ def createFigure(screen: Screen):
     else:
         newPiece = PieceFour()
         newPiece.setPosition(None, screen=screen)
-        return newPiece  
+        return newPiece
+    
+def on_press(key):
+    
+    if key == keyboard.Key.right:
 
 
 screen = Screen()
 figura = PieceOne()
+figura.setPosition(None, screen=screen)
 screen.setCurrent(figura)
-screen.printScreen()
-figura.setPosition(movement=Movements.DOWN, screen=screen)
-screen.printScreen()
-figura.setPosition(movement=Movements.RIGHT, screen=screen)
-screen.printScreen()
-figura.setPosition(movement=Movements.DOWN, screen=screen)
-screen.printScreen()
-figura.setPosition(movement=Movements.RIGHT, screen=screen)
-screen.printScreen()
 
+while True:
 
-# while True:
+    # if screen.currentFigure == None:
+    #     screen.setCurrent(createFigure())
 
-#     if screen.currentFigure == None:
-#         screen.setCurrent(createFigure())
-#     else:
-#         if screen.currentFigure.isAlive == False:
-#             del screen.currentFigure
-#             screen.setCurrent(None)
-#             continue
-#         else:
-#             print
+    # else:
+    #     if screen.currentFigure.isAlive == False:
+    #         del screen.currentFigure
+    #         screen.setCurrent(None)
+    #         continue
+    #     else:
+
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()
+    
+
