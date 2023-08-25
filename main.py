@@ -54,6 +54,9 @@ def on_press(key, currentFigure: Piece, screen: Screen):
     elif key == keyboard.Key.up:
         currentFigure.setPosition(Movements.ROTATE, screen)
     screen.printScreen()
+    print(f'ANTIGUAS: {currentFigure.oldCoordinates}', f'\nACTUALES: {currentFigure.actualCoordinates}', f'ROTATE: {currentFigure.rotation}')
+          
+    print("------------------------------------------------")
 
 def gameOver(currentFigure: Piece, screen: Screen):
     for item in currentFigure.actualCoordinates:

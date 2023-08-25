@@ -36,20 +36,20 @@ class Piece():
             if x < 0 or x > 9:
                 self.actualCoordinates = self.oldCoordinates
                 if movement == Movements.ROTATE:
-                    self.rotation =-1 if self.rotation > 1 else 3
+                    self.rotation = self.rotation - 1 if self.rotation > 0 else 3
                 return
             
             elif y < 0 or y > 9:
                 self.actualCoordinates = self.oldCoordinates
                 if movement == Movements.ROTATE:
-                    self.rotation =-1 if self.rotation > 1 else 3
+                    self.rotation = self.rotation -1 if self.rotation > 0 else 3
                 return
             
             elif screen.screenList[x][y] == Icons.BLACK.value and (x, y) not in self.oldCoordinates:
                 
                 self.actualCoordinates = self.oldCoordinates
                 if movement == Movements.ROTATE:
-                    self.rotation =-1 if self.rotation > 1 else 3
+                    self.rotation = self.rotation - 1 if self.rotation > 0 else 3
                 return
 
             else:
