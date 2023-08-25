@@ -1,5 +1,5 @@
 # Cuadrado
-import random
+from random import randrange
 from Movements.movements import *
 from screen import Screen
 from Figuras.piece import Piece
@@ -9,13 +9,14 @@ class PieceOne(Piece):
 
     def __init__(self):
         super().__init__()
-        self.firstBlock = (0, random.randrange(0, 9))
+        self.firstBlock = (0, randrange(0, 8))
         self.secondBlock = (0, self.firstBlock[1]+1)
         self.thirdBlock = (self.firstBlock[0]+1, self.firstBlock[1])
         self.fourthBlock = (self.firstBlock[0]+1, self.firstBlock[1]+1)
         self.oldCoordinates = [self.firstBlock, self.secondBlock, self.thirdBlock, self.fourthBlock]
         self.actualCoordinates = [self.firstBlock, self.secondBlock, self.thirdBlock, self.fourthBlock]
         self.type = 'ONE'
+        self.rotation = 0
     
     def __del__(self):
         return
@@ -23,21 +24,21 @@ class PieceOne(Piece):
     def Position(self) -> list:
         return self.actualCoordinates
     
-    def isAlive(self, screen: Screen) -> bool:
+    # def isAlive(self, screen: Screen) -> bool:
         
-        if self.thirdBlock[0] == 9:
-            return False
+    #     if self.thirdBlock[0] == 9:
+    #         return False
         
-        elif self.fourthBlock[0] == 9:
-            return False
+    #     elif self.fourthBlock[0] == 9:
+    #         return False
 
-        elif screen.screenList[self.thirdBlock[0]+1][self.thirdBlock[1]] == Icons.BLACK:
-            return False
+    #     elif screen.screenList[self.thirdBlock[0] + 1][self.thirdBlock[1]] == Icons.BLACK.value:
+    #         return False
         
-        elif screen.screenList[self.fourthBlock[0]+1][self.fourthBlock[1]] == Icons.BLACK:
-            return False
+    #     elif screen.screenList[self.fourthBlock[0]+1][self.fourthBlock[1]] == Icons.BLACK.value:
+    #         return False
 
-        return True
+    #     return True
 
     def printCoordinates(self):
         print(f'1era -> {self.firstBlock}')

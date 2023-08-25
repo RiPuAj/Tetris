@@ -6,54 +6,98 @@ from Figuras.piece_three import *
 from Figuras.piece_four import *
 from Movements.movements import *
 from pynput import keyboard
+from os import system
 from time import sleep
 
 def createFigure(screen: Screen):
-    randomSelection = randrange(0, 3)
+    randomSelection = 1 # randrange(0, 3)
 
     if randomSelection == 0:
         newPiece = PieceOne()
-        newPiece.setPosition(None, screen=screen)
+        newPiece.setPosition(movement=Movements.NONE,
+                             screen=screen
+                             )
         return newPiece
     
     elif randomSelection == 1:
         newPiece = PieceTwo()
-        newPiece.setPosition(None, screen=screen)
+        newPiece.setPosition(movement=Movements.NONE,
+                             screen=screen
+                             )
         return newPiece
     
     elif randomSelection == 2:
         newPiece = PieceThree()
-        newPiece.setPosition(None, screen=screen)
+        newPiece.setPosition(movement=Movements.NONE,
+                             screen=screen
+                             )
         return newPiece
     
     else:
         newPiece = PieceFour()
-        newPiece.setPosition(None, screen=screen)
+        newPiece.setPosition(movement=Movements.NONE,
+                             screen=screen
+                             )
         return newPiece
     
-def on_press(key):
+def on_press(key, currentFigure: Piece, screen: Screen):
     
     if key == keyboard.Key.right:
+        currentFigure.setPosition(Movements.RIGHT, screen)
+
+    elif key == keyboard.Key.left:
+        currentFigure.setPosition(Movements.LEFT, screen)
+
+    elif key == keyboard.Key.down:
+        currentFigure.setPosition(Movements.DOWN, screen)
+    
+    elif key == keyboard.Key.up:
+        currentFigure.setPosition(Movements.ROTATE, screen)
+    screen.printScreen()
+
+def gameOver(currentFigure: Piece, screen: Screen):
+    for item in currentFigure.actualCoordinates:
+        if item[0] == 0:
+            return True
+    return False
+
+def main():
+    screen = Screen()
+    currentFigure = createFigure(screen)
+    listenerKeyboard = keyboard.Listener(on_press=lambda key: 
+                                         on_press(key,
+                                         currentFigure=currentFigure,
+                                         screen=screen
+                                         )
+                                        )
+    listenerKeyboard.start()
 
 
-screen = Screen()
-figura = PieceOne()
-figura.setPosition(None, screen=screen)
-screen.setCurrent(figura)
 
-while True:
+    while True:
 
-    # if screen.currentFigure == None:
-    #     screen.setCurrent(createFigure())
+        if currentFigure == None:
+            currentFigure = createFigure(screen)
+        else:
+            if currentFigure.isAlive(screen) == False:
+                if gameOver(currentFigure, screen):
+                    break
+                
+                currentFigure = None
+                continue
+            
+            else:
+                sleep(1)
+                #currentFigure.setPosition(Movements.DOWN, screen)
 
-    # else:
-    #     if screen.currentFigure.isAlive == False:
-    #         del screen.currentFigure
-    #         screen.setCurrent(None)
-    #         continue
-    #     else:
+        screen.checkLines()
+        #system('cls')
+        #screen.printScreen()
+        #print("-----------------------------------------------------------------")
+    
 
-    listener = keyboard.Listener(on_press=on_press)
-    listener.start()
+
+if __name__ == "__main__":
+    main()
     
 
