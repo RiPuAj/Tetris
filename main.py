@@ -10,7 +10,7 @@ from os import system
 from time import sleep
 
 def createFigure(screen: Screen):
-    randomSelection = 1 # randrange(0, 3)
+    randomSelection = randrange(0, 100) % 4
 
     if randomSelection == 0:
         newPiece = PieceOne()
@@ -53,10 +53,12 @@ def on_press(key, currentFigure: Piece, screen: Screen):
     
     elif key == keyboard.Key.up:
         currentFigure.setPosition(Movements.ROTATE, screen)
+    
+    system('cls')
     screen.printScreen()
-    print(f'ANTIGUAS: {currentFigure.oldCoordinates}', f'\nACTUALES: {currentFigure.actualCoordinates}', f'ROTATE: {currentFigure.rotation}')
-          
-    print("------------------------------------------------")
+    # print("ACTUALES:", currentFigure.actualCoordinates, "ROTACION:", currentFigure.rotation)
+    # print("--------------------------------------------------------")
+
 
 def gameOver(currentFigure: Piece, screen: Screen):
     for item in currentFigure.actualCoordinates:
@@ -91,12 +93,11 @@ def main():
             
             else:
                 sleep(1)
-                #currentFigure.setPosition(Movements.DOWN, screen)
+                currentFigure.setPosition(Movements.DOWN, screen)
 
         screen.checkLines()
-        #system('cls')
-        #screen.printScreen()
-        #print("-----------------------------------------------------------------")
+        system('cls')
+        screen.printScreen()
     
 
 

@@ -68,14 +68,20 @@ class Piece():
 
     def isAlive(self, screen: Screen) -> bool:
         
-        if self.thirdBlock[0] == 9:
+        if self.firstBlock[0] == 9:
+            return False
+
+        elif self.secondBlock[0] == 9:
+            return False
+
+        elif self.thirdBlock[0] == 9:
             return False
         
         elif self.fourthBlock[0] == 9:
             return False
 
         for item in self.actualCoordinates:
-            x = item[0]+1
+            x = item[0] + 1
             y = item[1]
             
             if (x, y) not in self.actualCoordinates:
