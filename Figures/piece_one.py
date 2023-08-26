@@ -2,7 +2,7 @@
 from random import randrange
 from Movements.movements import *
 from screen import Screen
-from Figuras.piece import Piece
+from Figures.piece import Piece
 from Icons.icons import Icons
 
 class PieceOne(Piece):

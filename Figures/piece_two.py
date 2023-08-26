@@ -1,5 +1,5 @@
 # Ele
-from Figuras.piece import Piece
+from Figures.piece import Piece
 from screen import Screen
 from Icons.icons import Icons
 from random import randrange

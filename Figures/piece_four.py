@@ -1,5 +1,5 @@
 # Zig zag
-from Figuras.piece import Piece
+from Figures.piece import Piece
 from random import randrange
 
 class PieceFour(Piece):

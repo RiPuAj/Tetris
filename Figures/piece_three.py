@@ -1,5 +1,5 @@
 # Palo
-from Figuras.piece import Piece
+from Figures.piece import Piece
 from random import randrange
 
 class PieceThree(Piece):
